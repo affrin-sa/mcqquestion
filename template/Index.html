@@ -1,0 +1,58 @@
+<!DOCTYPE  html>
+<head>
+    <title>Django Python Online Exam</title>
+    
+    <script>
+      
+     function getanswers()
+     {
+          document.getElementById("UserAnswers").innerHTML="";
+          var e = document.getElementsByTagName("input");
+              for(i=0;i<=e.length;i++)
+              {
+                 if(e[i].type=="radio")
+                 {
+                   if(e[i].checked)
+                   {
+                        document.getElementById("UserAnswers").innerHTML+="Q "+e[i].name+ " The Answers You Are Selected Is: "+e[i].value+"<br>";
+                   }
+                 }
+              }
+     }
+     </script>
+</head>
+<body>
+    <center>
+        <h1 style="color:#26004d;"><b>Online Examination</b></h1>
+        <h3><b>Gentral MCQ</b></h3>
+    </center>
+        <div style="padding-left: 30px;">
+              <table>
+              {% for results in Exam%}
+              <tr>
+                  <td>{{results.id}} {{results.Question}}</td>
+             </tr>
+             <tr>
+                  <td><input type="radio" name={{results.id}} id="Option1" value="{{results.Option1}}">{{results.Option1}}</td>
+             </tr>
+             <tr>
+                  <td><input type="radio" name={{results.id}} id="Option2" value="{{results.Option2}}">{{results.Option2}}</td>
+             </tr>
+             <tr>
+                  <td><input type="radio" name={{results.id}} id="Option3" value="{{results.Option3}}">{{results.Option3}}</td>
+             </tr>
+             <tr>
+                  <td><input type="radio" name={{results.id}} id="Option4" value="{{results.Option4}}">{{results.Option4}}</td>
+             </tr>
+             <tr>
+                  <td><label name = {{results.Ans}} id="Ans" style="display:none; color : green"><b>{{results.Ans}}</b></label></td>
+             </tr>
+             {% endfor %}
+              </table>
+         <hr/>
+         <input type="submit" value="Submit" id="b1" onclick="getanswers()">
+         <br>
+         <b id="UserAnswers"></b>
+        </div>
+</body>
+</html>
